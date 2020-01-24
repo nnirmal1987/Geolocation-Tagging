@@ -1,0 +1,51 @@
+Question 1:- User data lookup 
+
+Identify city ,province and country based on the lat,long values using the reverse geocoder api.
+Update the user pandas dataframe with these values.
+Create lookup table based on dictionary group by country where user visited along with the province and city pair in each country.
+
+Used oo approach by using a class.
+
+Complexity and perfomance
+--------------------------
+fetch_province_city_country --> Fetches values from the API for each captured locations. Best case is when the number of lat,long is less and worst case is when the number of data points is huge . O(n)
+
+prov_city_count --> Traversing ordered dictionary , individual repsonses from the reverse geocoder identifying the province,city and country. each result would return one values corresponding to a lat, long location.  Worst and Best case O(1)
+
+lookup_dictionary --> Grouping up by country and displaying province and city in a datafreme . Worst and best case in O(1)
+
+Total complexity ---O(n)
+
+
+Question 2:- Likely home and work
+
+Inherited class from person (Question 1).
+Used 'naturalearth_lowres' to project each persons lat, long locations on the map.
+Removed antartica and australia from map as user hasnt visited the place.
+
+Identify likely home and work location.
+Assumption : The most duration of time at a location is tagged as Home.
+
+For each country identify where (city,province) they spent most time using the maximum value of 'duration(ms) feild.
+Those locations are the likely home .
+
+For each country :
+		Conduct a clustering k means algorithm to classify likely home and work. Distance metric could be the haversine distance.
+		Value of k could be identified based on elbow curve evaluating the SSE for each K values.
+
+Consider cluster pairs which are maximum distance from each other .
+Calculate the duration of each and maximum value implies Home and other is cluster.
+
+For reconforming --> evaluation is done based on the day and time value.
+If for a list of work assigned values check if its in the AM which can be done based on evaluating the duation.
+Rest are home ( Mean value of time in cluster duration would be PM)
+
+
+NOTE : Implementation could not be completed due to lack of time.
+
+# Trial to check the k means clustering
+import math
+points = np.array('values')
+rads = np.math.radians(points)
+clusterer = hdbscan.HDBSCAN(min_cluster_size=K, metric='haversine')
+cluster_labels = clusterer.fit_predict(points)
