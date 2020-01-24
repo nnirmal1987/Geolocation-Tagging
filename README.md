@@ -17,3 +17,8 @@ lookup_dictionary --> Grouping up by country and displaying province and city in
 
 Total complexity ---O(n)
 
+
+
+datarefresh_design:
+-------------------
+A sample data refresh design flow diagram using the Foursquare API. A system that can receive a location fix (as a [latitude, longitude, accuracy] mobile GPS fix) and run an algorithm to find the actual venue a user has visited using Foursquare as a venues-database.The objective was to minimize the calls to the Foursquare API and include a way to refresh Foursquare results as data retrieved from Foursquare can only be kept for a maximum of 30 days.Keeping in mind the definition of accuracy for a mobile GPS fix.
